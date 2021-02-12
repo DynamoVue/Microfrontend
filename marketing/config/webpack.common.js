@@ -1,3 +1,6 @@
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+
 module.exports = {
     module: {
         rules: [
@@ -8,9 +11,9 @@ module.exports = {
                     loader: 'babel-loader',
                     options: {
                         presets: [
-                            '@babel/preset-react',
-                            '@babel/preset-typescript',
                             '@babel/preset-env',
+                            '@babel/preset-typescript',
+                            '@babel/preset-react',
                         ],
                         plugins: [
                             [
@@ -27,4 +30,10 @@ module.exports = {
     resolve: {
         extensions: ['.tsx', '.ts', '.js', '.jsx'],
     },
+    plugins: [
+        new HtmlWebpackPlugin({
+            template: './public/index.html'
+        }),
+        new CleanWebpackPlugin()
+    ]
 }
