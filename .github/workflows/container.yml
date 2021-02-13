@@ -43,7 +43,7 @@ jobs:
         run: npm run build
 
       - name: Set up AWS-CLI version
-      - uses: chrislennon/action-aws-cli@v1.1
+        uses: chrislennon/action-aws-cli@v1.1
 
       - name: Sync dist folder with AWS
         run: aws s3 sync dist s3://${{ secrets.AWS_S3_BUCKET_NAME }}/container/latest
