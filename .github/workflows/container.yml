@@ -7,11 +7,11 @@ on:
       - master
     paths:
       - 'container/**'
-      - '.github/workflows'
+      - '.github/workflows/**'
 
 defaults:
   run:
-    working-directory: /container
+    working-directory: container
 
 jobs:
   build:
