@@ -10,10 +10,10 @@ const devConfig = {
         path: path.resolve(__dirname, '..', 'dist'),
         filename: '[name].[contenthash].js',
         chunkFilename: '[name].[contenthash].js',
-        publicPath: 'http://localhost:8086/'
+        publicPath: 'http://localhost:8087/'
     },
     devServer: {
-        port: 8086,
+        port: 8087,
         historyApiFallback: {
             index: 'index.html'
         },

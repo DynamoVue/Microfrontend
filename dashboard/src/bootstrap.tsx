@@ -1,10 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
 import { Location, History, createMemoryHistory, createBrowserHistory } from "history";
 import { GlobalStore, IGlobalStore } from 'redux-micro-frontend';
 
-import { store } from './redux';
 import { memoryHistory } from './history';
 import App from './App';
 
@@ -33,15 +31,9 @@ const onContainerNavigate = (location: Location) => {
 const mount = (el: Element, { onNavigate, history: defaultHistory, globalStore }: { onNavigate?: () => void, history?: History, globalStore?: IGlobalStore }) => {
     const history = defaultHistory || memoryHistory;
 
-    if (globalStore) {
-        globalStore.RegisterStore("MarketingApp", store);
-    }
-    
     ReactDOM.render(
         <AppContext.Provider value={{ onNavigate, history, globalStore }}>
-            <Provider store={store}>
-                <App />
-            </Provider>
+            <App />
         </AppContext.Provider>, 
         el
     );
@@ -52,7 +44,7 @@ const mount = (el: Element, { onNavigate, history: defaultHistory, globalStore }
 }
 
 if (process.env.NODE_ENV === 'development') {
-    const devRoot = document.querySelector('#_marketing-dev-root');
+    const devRoot = document.querySelector('#_dashboard-dev-root');
 
     devRoot && mount(devRoot, { history: createBrowserHistory() });
 }

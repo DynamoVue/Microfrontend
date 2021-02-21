@@ -145,6 +145,7 @@ export default function Pricing() {
   return (
     <React.Fragment>
       {/* Hero unit */}
+      <RouterLink to="/">Home</RouterLink>
       <Container maxWidth="sm" component="main" className={classes.heroContent}>
         <Typography
           component="h1"

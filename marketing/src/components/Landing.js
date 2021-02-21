@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
@@ -10,6 +10,11 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import MaterialLink from '@material-ui/core/Link';
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+
+import { createBlog } from '../redux';
+import { useTypedSelector } from '../hooks/useTypedSelector';
+import { useAction } from '../hooks/useAction';
 
 function Copyright() {
   return (
@@ -65,6 +70,18 @@ const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 export default function Album() {
   const classes = useStyles();
+  const dispatch = useDispatch();
+  const { fetchBlogs } = useAction();
+
+  const [title, setTitle] = useState('');
+  const [author, setAuthor] = useState('');
+
+  const { loading } = useTypedSelector(state => state.blogCreate);
+  const { data: blogs, loading: blogsLoading } = useTypedSelector(state => state.blogs);
+
+  useEffect(() => {
+    fetchBlogs();
+  }, []);
 
   return (
     <React.Fragment>
@@ -108,6 +125,17 @@ export default function Album() {
                   </Link>
                 </Grid>
               </Grid>
+            </div>
+            {
+              blogsLoading ? 'Loading blogs ....!': blogs && blogs.length > 0 ? blogs.map((blog, index) => <div key={index}>{blog.title} - {blog.author}</div>): 'No posts yet !'
+            }
+            <div style={{ marginTop: 30 }}>
+              {loading && 'Loading .......'}
+              <label htmlFor="title">Title: </label>
+              <input type="text" name="title" id="title" value={title} onChange={(e) => setTitle(e.target.value)}/>
+              <label htmlFor="author">Author: </label>
+              <input type="text" name="author" id="author" value={author} onChange={(e) => setAuthor(e.target.value)}/>
+              <button onClick={() => dispatch(createBlog({ title, author }))}>Create</button>
             </div>
           </Container>
         </div>

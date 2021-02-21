@@ -3,9 +3,9 @@ import { Location } from "history";
 import { useHistory } from 'react-router-dom';
 import { AppContext } from '../../bootstrap';
 //@ts-ignore
-import { mount } from 'marketing/MarketingApp';
+import { mount } from 'dashboard/DashboardApp';
 
-const MarketingApp: React.FC = () => {
+const DashboardApp: React.FC = () => {
     const ref = useRef<HTMLDivElement | null>(null);
     const { globalStore } = useContext(AppContext);
     const history = useHistory();
@@ -34,4 +34,4 @@ const MarketingApp: React.FC = () => {
     )
 }
 
-export default MarketingApp;
+export default DashboardApp;

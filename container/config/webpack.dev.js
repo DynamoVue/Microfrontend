@@ -13,6 +13,7 @@ const devConfig = {
     devServer: {
         port: 8085,
         contentBase: path.join(__dirname, '..', 'dist'),
+        historyApiFallback: true
     },
     output: {
         path: path.resolve(__dirname, '..', 'dist'),
@@ -24,7 +25,8 @@ const devConfig = {
         new ModuleFederationPlugin({
             name: 'container',
             remotes: {
-                "marketing": "marketing@http://localhost:8086/remoteEntry.js"
+                "marketing": "marketing@http://localhost:8086/remoteEntry.js",
+                "dashboard": "dashboard@http://localhost:8087/remoteEntry.js"
             },
             shared: packageJSON.dependencies
         }),

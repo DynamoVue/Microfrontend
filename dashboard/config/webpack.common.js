@@ -39,10 +39,10 @@ module.exports = {
         new CleanWebpackPlugin(),
         new ModuleFederationPlugin({
             name: 'marketing',
-            library: { type: "var", name: "marketing" },
+            library: { type: "var", name: "dashboard" },
             filename: 'remoteEntry.js',
             exposes: {
-                "./MarketingApp": "./src/bootstrap.tsx"
+                "./DashboardApp": "./src/bootstrap.tsx"
             },
             shared: packageJSON.dependencies
         }),
